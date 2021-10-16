@@ -1,0 +1,25 @@
+﻿@model List<WebApp.Models.Room>
+<a href="/room/create">Create</a>
+    <table>
+        <tr>
+            <td>
+                RoomId
+            </td>
+            <td>Room Number</td>
+            <td>Capacity</td>
+        </tr>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>@item.Number</td>
+                    <td>@item.Capacity</td>
+                    <td><a href="/room/"></td>
+                    <td><a href="/room/delete/@item.Id">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
