@@ -1,0 +1,25 @@
+﻿@model List<WebApp.Models.Timeslot>
+<a href="/timeslot/create">Create</a>
+<table>
+    <tr>
+        <td>
+            Weekday
+        </td>
+        <td>StartTime</td>
+        <td>EndTime</td>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Weekday
+                </td>
+                <td>@item.Start</td>
+                <td>@item.End</td>
+                <td><a href="/room/"></td>
+                <td><a href="/timeslot/delete/@item.Id">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
