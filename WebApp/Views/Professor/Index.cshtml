@@ -1,0 +1,22 @@
+﻿@model List<WebApp.Models.Professor>
+<a href="/professor/create">Create</a>
+<table>
+    <tr>
+        <td>
+            Title
+        </td>
+        <td>First Name</td>
+        <td>Last Name</td>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>        
+            <td><a href="/professor/delete/@item.Id">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+</table>

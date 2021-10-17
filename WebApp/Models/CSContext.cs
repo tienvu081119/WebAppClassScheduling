@@ -15,5 +15,6 @@ namespace WebApp.Models
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Timeslot> Timeslots { get; set; }
 
+        public DbSet<Professor> Professors { get; set; }
     }
 }
