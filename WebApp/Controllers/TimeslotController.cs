@@ -14,7 +14,20 @@ namespace WebApp.Controllers
         public TimeslotController(CSContext context)
         {
             repository = new TimeslotRepository(context);
+        }      
+
+        public IActionResult Edit(int id)
+        {
+            return View(repository.GetTimeslotById(id));
         }
+
+        [HttpPost]
+        public IActionResult Edit(Timeslot obj)
+        {
+            repository.Edit(obj);
+            return Redirect("/timeslot");
+        }
+
 
         public IActionResult Delete(int id)
         {
@@ -35,8 +48,12 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Create(Timeslot obj)
         {
-            repository.Add(obj);
-            return Redirect("/timeslot");
+            if (ModelState.IsValid)
+            {
+                repository.Add(obj);
+                return Redirect("/timeslot");
+            }
+            return View(obj);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApp.Models
@@ -9,9 +10,9 @@ namespace WebApp.Models
         [Column("TimeslotId")]
         public int Id { get; set; }
         public string Weekday { get; set; }
-        [Column("StartTime")]
+        [Column("StartTime"),Required]
         public TimeSpan Start { get; set; }
-        [Column("EndTime")]
+        [Column("EndTime"), Required]
         public TimeSpan End { get; set; }
     }
 }

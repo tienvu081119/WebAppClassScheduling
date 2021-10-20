@@ -5,14 +5,25 @@ using System.Threading.Tasks;
 
 namespace WebApp.Models
 {
-    public class RoomRepository
+    public class RoomRepository : BaseRepository
     {
-        CSContext context;
-        public RoomRepository(CSContext context)
+        
+        public RoomRepository(CSContext context) : base(context)
         {
-            this.context = context;
+            
         }
 
+
+        public int Edit(Room obj)
+        {
+            context.Rooms.Update(obj);
+            return context.SaveChanges();
+        }
+
+        public Room GetById(int id)
+        {
+            return context.Rooms.Find(id);
+        }
         public int Delete(int id)
         {
             context.Rooms.Remove(new Room { Id = id });

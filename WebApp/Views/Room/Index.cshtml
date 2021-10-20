@@ -1,25 +1,23 @@
 ﻿@model List<WebApp.Models.Room>
 <a href="/room/create">Create</a>
-    <table>
-        <tr>
-            <td>
-                RoomId
-            </td>
-            <td>Room Number</td>
-            <td>Capacity</td>
-        </tr>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>             
+                <th>Room Number</th>
+                <th>Capacity</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @item.Id
-                    </td>
-                    <td>@item.Number</td>
-                    <td>@item.Capacity</td>
-                    <td><a href="/room/"></td>
-                    <td><a href="/room/delete/@item.Id">Delete</a></td>
-                </tr>
+            <tr>
+                <td>@item.Number</td>
+                <td>@item.Capacity</td>            
+                <td><a href="/room/delete/@item.Id"><i class="fas fa-trash"></i></a></td>
+                <td><a href="/room/edit/@item.Id"><i class="fas fa-edit"></i></a></td>
+            </tr>
             }
         </tbody>
     </table>

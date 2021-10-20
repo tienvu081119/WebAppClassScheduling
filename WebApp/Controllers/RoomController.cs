@@ -16,6 +16,18 @@ namespace WebApp.Controllers
             repository = new RoomRepository(context);
         }
         
+        public IActionResult Edit(int id)
+        {
+            return View(repository.GetById(id));
+        }
+        [HttpPost]
+
+        public IActionResult Edit(Room obj)
+        {
+            repository.Edit(obj);
+            return Redirect("/room");
+        }
+
         public IActionResult Delete(int id)
         {
             repository.Delete(id);

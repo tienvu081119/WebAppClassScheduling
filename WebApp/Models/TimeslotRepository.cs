@@ -5,12 +5,22 @@ using System.Threading.Tasks;
 
 namespace WebApp.Models
 {
-    public class TimeslotRepository
-    {
-        CSContext context;
-        public TimeslotRepository(CSContext context)
+    public class TimeslotRepository : BaseRepository
+    {       
+        public TimeslotRepository(CSContext context) : base(context)
         {
-            this.context = context;
+         
+        }
+
+        public int Edit(Timeslot obj)
+        {
+            context.Timeslots.Update(obj);
+            return context.SaveChanges();
+        }
+
+        public Timeslot GetTimeslotById(int id)
+        {
+            return context.Timeslots.Find(id);
         }
 
         public int Delete(int id)
