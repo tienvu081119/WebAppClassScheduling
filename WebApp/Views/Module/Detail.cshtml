@@ -1,0 +1,36 @@
+﻿@model WebApp.Models.Module
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">@Model.Code - @Model.Name</h2>
+    </div>
+    <div class="card-body">
+        <table>
+            <thead>
+                <tr><th>Profressor</th></tr>
+            </thead>
+            <tbody>
+                @foreach(WebApp.Models.ModuleProfessor item in ViewBag.moduleProfessors)
+                {
+                    <tr>
+                        <td>@item.ProfessorId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form method="post">
+            <div>
+                <label>Professor</label>
+                <select name="professorId" multiple>
+                    @foreach(WebApp.Models.Professor item in ViewBag.professors)
+                    {
+                        <option value="@item.Id">@item.FullName</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <button>Save changes</button>
+            </div>
+        </form>
+    </div>
+</div>

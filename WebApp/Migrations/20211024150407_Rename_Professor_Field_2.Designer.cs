@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Models;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(CSContext))]
-    partial class CSContextModelSnapshot : ModelSnapshot
+    [Migration("20211024150407_Rename_Professor_Field_2")]
+    partial class Rename_Professor_Field_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

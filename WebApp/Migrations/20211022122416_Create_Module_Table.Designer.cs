@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Models;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(CSContext))]
-    partial class CSContextModelSnapshot : ModelSnapshot
+    [Migration("20211022122416_Create_Module_Table")]
+    partial class Create_Module_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,25 +42,12 @@ namespace WebApp.Migrations
                     b.ToTable("Module");
                 });
 
-            modelBuilder.Entity("WebApp.Models.ModuleProfessor", b =>
-                {
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfessorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ModuleId", "ProfessorId");
-
-                    b.ToTable("ModuleProfessor");
-                });
-
             modelBuilder.Entity("WebApp.Models.Professor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ProfessorId")
+                        .HasColumnName("ProfessorsId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")

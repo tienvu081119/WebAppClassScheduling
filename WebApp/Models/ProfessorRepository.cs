@@ -24,10 +24,16 @@ namespace WebApp.Models
             return context.Professors.ToList();
         }
 
-        public int Add(Professor obj)
+        //public int Add(Professor obj)
+        //{
+        //    context.Professors.Add(obj);
+        //    return context.SaveChanges();
+        //}
+
+        public async Task<int> Add(Professor obj)
         {
             context.Professors.Add(obj);
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
         }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Models;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(CSContext))]
-    partial class CSContextModelSnapshot : ModelSnapshot
+    [Migration("20211024145031_Rename_ProfessorsId_ProfessorId")]
+    partial class Rename_ProfessorsId_ProfessorId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +60,7 @@ namespace WebApp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ProfessorId")
+                        .HasColumnName("ProfessorsId")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("FirstName")

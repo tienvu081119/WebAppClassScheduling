@@ -1,0 +1,45 @@
+﻿@* List<WebApp.Models.Module>*@
+@model WebApp.Models.Module
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+<form action="/module/create" method="post">  
+    <div>
+        <label asp-for="Code"></label>
+        <input type="text" asp-for="Code" />
+    </div>
+    <div>
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" />
+    </div>
+    <div>
+        <button>Save Changes</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(WebApp.Models.Module item in ViewBag.modules)
+            {
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>@item.Code</td>
+            <td>@item.Name </td>
+            <td>
+                <a href="/module/detail/@item.Id">
+                    <i class="fas fa-info-circle"></i>
+                </a>
+            </td>
+        </tr>
+            }
+    </tbody>
+</table>

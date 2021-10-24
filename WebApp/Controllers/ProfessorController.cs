@@ -34,9 +34,9 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Professor obj)
+        public async Task<IActionResult> Create(Professor obj)
         {
-            repository.Add(obj);
+            int ret = await repository.Add(obj);
             return Redirect("/professor");
         }
     }
