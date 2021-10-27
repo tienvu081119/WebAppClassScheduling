@@ -16,6 +16,7 @@ namespace WebApp.Models
         [Column("ModuleName")]
         public string Name { get; set; }    
         public List<ModuleProfessor> ModuleProfessors { get; set; }
+        public List<ModuleGroup> ModuleGroups { get; set; }
 
     }
 }
