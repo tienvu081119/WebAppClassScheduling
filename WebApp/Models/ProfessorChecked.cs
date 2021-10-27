@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace WebApp.Models
 {
-    [Table("Professor")]
-    public class Professor
+    public class ProfessorChecked
     {
         [Column("ProfessorId")]
         public int Id { get; set; }
+
         public string FullName { get; set; }
 
-        public List<ModuleProfessor> ModuleProfessors { get; set; }
-   
+        public bool Checked { get; set; }
     }
 }

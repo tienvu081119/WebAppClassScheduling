@@ -4,15 +4,23 @@
         <h2 class="card-title">@Model.Code - @Model.Name</h2>
     </div>
     <div class="card-body">
-        <table>
-            <thead>
-                <tr><th>Profressor</th></tr>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr><th>Profressor</th><th>FullName</th></tr>
             </thead>
             <tbody>
-                @foreach(WebApp.Models.ModuleProfessor item in ViewBag.moduleProfessors)
-                {
+                @*@foreach (WebApp.Models.ModuleProfessor item in Model.ModuleProfessors)
+                    {
                     <tr>
                         <td>@item.ProfessorId</td>
+                        <td>@item.Professor.FullName </td>
+                    </tr>
+                    }*@
+
+                @foreach (WebApp.Models.Professor item in ViewBag.professorsModule)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
                     </tr>
                 }
             </tbody>
@@ -21,8 +29,8 @@
         <form method="post">
             <div>
                 <label>Professor</label>
-                <select name="professorId" multiple>
-                    @foreach(WebApp.Models.Professor item in ViewBag.professors)
+                <select class="form-control" name="professorId" multiple>
+                    @foreach (WebApp.Models.Professor item in ViewBag.professors)
                     {
                         <option value="@item.Id">@item.FullName</option>
                     }
@@ -34,3 +42,10 @@
         </form>
     </div>
 </div>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $('select[name="professorId"]').select2();
+</script>

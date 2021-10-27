@@ -23,6 +23,7 @@
             <th>Code</th>
             <th>Name</th>
             <th>Detail</th>
+            <th>Browse</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,11 @@
             <td>@item.Name </td>
             <td>
                 <a href="/module/detail/@item.Id">
+                    <i class="fas fa-info-circle"></i>
+                </a>
+            </td>
+            <td>
+                <a href="/module/browse/@item.Id">
                     <i class="fas fa-info-circle"></i>
                 </a>
             </td>

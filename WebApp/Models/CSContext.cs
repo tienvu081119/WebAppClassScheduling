@@ -16,13 +16,22 @@ namespace WebApp.Models
         public DbSet<Timeslot> Timeslots { get; set; }
         public DbSet<Professor> Professors { get; set; }
         public DbSet<Module> Modules { get; set; }
-
         public DbSet<ModuleProfessor> ModuleProfessors { get; set; }
+
+        public DbSet<ProfessorChecked> professorCheckeds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ModuleProfessor>().HasKey(p => new { p.ModuleId, p.ProfessorId });
+            modelBuilder.Entity<ModuleProfessor>()
+                .HasOne(mp => mp.Module)
+                .WithMany(m => m.ModuleProfessors)
+                .HasForeignKey(mp => mp.ModuleId);
+            modelBuilder.Entity<ModuleProfessor>()
+                .HasOne(mp => mp.Professor)
+                .WithMany(p => p.ModuleProfessors)
+                .HasForeignKey(mp => mp.ProfessorId);
 
         }
 

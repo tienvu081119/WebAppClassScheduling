@@ -1,0 +1,44 @@
+﻿@model WebApp.Models.Module
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">@Model.Code - @Model.Name @Model.Id</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr><th>Profressor</th><th>FullName</th></tr>
+            </thead>
+            <tbody>
+
+                @foreach (WebApp.Models.ProfessorChecked item in ViewBag.professors)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>
+                            @if (item.Checked)
+                            {
+                                <input class="c" type="checkbox" checked value="@item.Id" />
+                            }
+                            else
+                            {
+                                <input class="c" type="checkbox" value="@item.Id" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $('.c').click(function () {
+      
+        var o = { 'professorId': $(this).val(), 'moduleId': @Model.Id };
+        console.log(o);
+        $.post('/module/addmoduleprofessor', o, (d) => {
+            console.log(d);
+        });
+    });
+</script>

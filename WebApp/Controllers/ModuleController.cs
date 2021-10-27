@@ -22,6 +22,18 @@ namespace WebApp.Controllers
             moduleProfessorRepository = new ModuleProfessorRepository(context);      
         }
 
+        public IActionResult AddModuleProfessor(ModuleProfessor obj)
+        {
+            // return Json(moduleProfessorRepository.Add(obj));
+            return Json(moduleProfessorRepository.Save(obj));
+        }      
+        public IActionResult Browse(int id)
+        {
+            ViewBag.professors = professorRepository.GetProfessorCheckeds(id);
+            return View(repository.GetModuleById(id));
+        }
+
+
         public IActionResult Index()
         {
             ViewBag.modules = repository.GetModules();
@@ -38,8 +50,10 @@ namespace WebApp.Controllers
 
         public IActionResult Detail(int id)
         {
-            ViewBag.professors = professorRepository.GetProfessors();
-            ViewBag.moduleProfessors = moduleProfessorRepository.GetModuleProfessorsByModule(id);
+            //ViewBag.professors = professorRepository.GetProfessors();
+            ViewBag.professors = professorRepository.GetProfessorsNotInModule(id);
+            //ViewBag.moduleProfessors = moduleProfessorRepository.GetModuleProfessorsByModule(id);
+            ViewBag.professorsModule = professorRepository.GetProfessorsByModuleId(id);
             return View(repository.GetModuleById(id));
         }
 
