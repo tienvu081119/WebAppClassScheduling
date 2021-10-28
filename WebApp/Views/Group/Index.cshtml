@@ -17,6 +17,7 @@
         <tr>
             <th>GroupId</th>
             <th>GroupSize</th>
+            <th>Detail</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +28,11 @@
                     @item.Id
                 </td>
                 <td>@item.Size</td>
-
+                <td>
+                    <a href="/group/detail/@item.Id">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>

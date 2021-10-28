@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace WebApp.Models
         public Group GetGroupById(int id)
         {
             return context.Groups.Find(id);
+        }
+
+        public Group GetGroupAndModules(int id)
+        {
+            return context.Groups.Include(p => p.ModuleGroups).FirstOrDefault<Group>(p => p.Id == id);
         }
     }
 }

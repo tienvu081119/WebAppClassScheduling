@@ -1,0 +1,23 @@
+﻿@model WebApp.Models.Group
+<div class="card">
+    <div class="card-header">
+        <h2 class="card-title">@Model.Size</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr><th>Module Code</th><th>Module Name</th></tr>
+            </thead>
+            <tbody>              
+                @foreach(WebApp.Models.ModuleGroup item in Model.ModuleGroups)
+            {
+                <tr>
+                    <td>@item.ModuleId</td>
+                
+                </tr>
+            }
+            </tbody>
+        </table>
+      
+    </div>
+</div>

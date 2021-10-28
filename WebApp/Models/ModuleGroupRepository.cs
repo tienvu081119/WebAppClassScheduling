@@ -12,6 +12,11 @@ namespace WebApp.Models
 
         }
 
+        public List<ModuleGroup> GetModuleGroupsByGroup(int id)
+        {
+            return context.ModuleGroups.Where(p => p.GroupId == id).ToList();
+        }
+
         
     }
 }

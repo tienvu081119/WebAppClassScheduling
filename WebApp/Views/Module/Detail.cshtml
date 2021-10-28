@@ -9,20 +9,20 @@
                 <tr><th>Profressor</th><th>FullName</th></tr>
             </thead>
             <tbody>
-                @*@foreach (WebApp.Models.ModuleProfessor item in Model.ModuleProfessors)
+                @foreach (WebApp.Models.ModuleProfessor item in Model.ModuleProfessors)
                     {
                     <tr>
                         <td>@item.ProfessorId</td>
                         <td>@item.Professor.FullName </td>
                     </tr>
-                    }*@
+                    }
 
-                @foreach (WebApp.Models.Professor item in ViewBag.professorsModule)
+                @*@foreach (WebApp.Models.Professor item in ViewBag.professorsModule)
                 {
                     <tr>
                         <td>@item.FullName</td>
                     </tr>
-                }
+                }*@
             </tbody>
         </table>
 

@@ -10,10 +10,13 @@ namespace WebApp.Controllers
     public class GroupController : Controller
     {
         GroupRepository groupRepository;
-        
+        ModuleGroupRepository moduleGroupRepository;
+        ModuleRepository moduleRepository;
         public GroupController(CSContext context)
         {
-            groupRepository = new GroupRepository(context);                 
+            groupRepository = new GroupRepository(context);
+            moduleGroupRepository = new ModuleGroupRepository(context);
+            moduleRepository = new ModuleRepository(context);
         }
 
 
@@ -28,6 +31,11 @@ namespace WebApp.Controllers
         {
             groupRepository.Add(obj);
             return Redirect("/group");
+        }
+
+        public IActionResult Detail(int id)
+        {           
+            return View(groupRepository.GetGroupAndModules(id));
         }
     }
 }

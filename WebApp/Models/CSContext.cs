@@ -34,9 +34,15 @@ namespace WebApp.Models
                 .WithMany(p => p.ModuleProfessors)
                 .HasForeignKey(mp => mp.ProfessorId);
 
-            modelBuilder.Entity<ModuleGroup>().HasKey(p => new { p.GroupId, p.ModuleId });
-            modelBuilder.Entity<ModuleGroup>().HasOne(mg => mg.Module).WithMany(m => m.ModuleGroups).HasForeignKey(mg => mg.ModuleId);
-            modelBuilder.Entity<ModuleGroup>().HasOne(mg => mg.Group).WithMany(g => g.ModuleGroups).HasForeignKey(mg => mg.GroupId);
+            modelBuilder.Entity<ModuleGroup>().HasKey(p => new { p.ModuleId, p.GroupId });
+            modelBuilder.Entity<ModuleGroup>()
+                .HasOne(mg => mg.Module)
+                .WithMany(m => m.ModuleGroups)
+                .HasForeignKey(mg => mg.ModuleId);
+            modelBuilder.Entity<ModuleGroup>()
+                .HasOne(mg => mg.Group)
+                .WithMany(g => g.ModuleGroups)
+                .HasForeignKey(mg => mg.GroupId);
 
 
         }

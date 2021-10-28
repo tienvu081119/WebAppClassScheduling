@@ -51,10 +51,10 @@ namespace WebApp.Controllers
         public IActionResult Detail(int id)
         {
             //ViewBag.professors = professorRepository.GetProfessors();
-            ViewBag.professors = professorRepository.GetProfessorsNotInModule(id);
+            //ViewBag.professors = professorRepository.GetProfessorsNotInModule(id);
             //ViewBag.moduleProfessors = moduleProfessorRepository.GetModuleProfessorsByModule(id);
-            ViewBag.professorsModule = professorRepository.GetProfessorsByModuleId(id);
-            return View(repository.GetModuleById(id));
+            //ViewBag.professorsModule = professorRepository.GetProfessorsByModuleId(id);
+            return View(repository.GetModuleAndProfessors(id));
         }
 
         [HttpPost]

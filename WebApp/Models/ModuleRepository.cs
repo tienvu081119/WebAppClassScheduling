@@ -30,6 +30,6 @@ namespace WebApp.Models
         public Module GetModuleAndProfessors(int id)
         {
             return context.Modules.Include(p => p.ModuleProfessors).FirstOrDefault<Module>(p => p.Id == id);
-        }
+        }        
     }
 }
