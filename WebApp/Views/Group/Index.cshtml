@@ -1,11 +1,22 @@
 ﻿@model WebApp.Models.Group
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 
-<form action="/group/create" method="post">
+@*<form action="/group/create" method="post">
   
     <div>
         <label asp-for="Size"></label>
         <input type="number" asp-for="Size" />
+    </div>
+    <div>
+        <button>Save Changes</button>
+    </div>
+</form>*@
+
+<form enctype="multipart/form-data" action="/group/create" method="post">
+
+    <div>
+        <label>Chose File CSV</label>
+       <input type="file" name="f" accept=".csv" />
     </div>
     <div>
         <button>Save Changes</button>

@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Models;
+using System.IO;
 
 namespace WebApp.Controllers
 {
@@ -26,12 +28,36 @@ namespace WebApp.Controllers
             return View();
         }
 
+
         [HttpPost]
-        public IActionResult Create(Group obj)
+        public IActionResult Create(IFormFile f)
         {
-            groupRepository.Add(obj);
+            //return Json(f.FileName);
+            List<Group> groups = new List<Group>();
+            using (StreamReader stream = new StreamReader(f.OpenReadStream()))
+            {
+                string line = stream.ReadLine();
+                while ((line = stream.ReadLine()) != null)
+                {
+                    string[] a = line.Split(',');
+                    groups.Add(new Group {                       
+                        Size = short.Parse(a[1])
+                    });
+                }
+            }
+
+            groupRepository.Add(groups);
             return Redirect("/group");
+         
         }
+
+
+        //[HttpPost]
+        //public IActionResult Create(Group obj)
+        //{
+        //    groupRepository.Add(obj);
+        //    return Redirect("/group");
+        //}
 
         public IActionResult Detail(int id)
         {           

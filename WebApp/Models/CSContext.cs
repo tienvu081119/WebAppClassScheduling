@@ -21,6 +21,10 @@ namespace WebApp.Models
         public DbSet<Group> Groups { get; set; }
         public DbSet<ModuleGroup> ModuleGroups { get; set; }
 
+        public DbSet<Class> Classes { get; set; }
+
+        public DbSet<Member> Members { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

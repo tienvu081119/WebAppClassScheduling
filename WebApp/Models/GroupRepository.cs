@@ -15,9 +15,9 @@ namespace WebApp.Models
             return context.Groups.ToList();
         }
 
-        public int Add(Group obj)
+        public int Add(List<Group> list)
         {
-            context.Groups.Add(obj);
+            context.Groups.AddRange(list);
             return context.SaveChanges();
         }
 
