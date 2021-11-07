@@ -1,0 +1,28 @@
+﻿@model List<WebApp.Models.Role>
+<form action="/role/create" method="post">
+    <div>
+        <label>Role Name</label>
+        <input type="text" name="name" />
+    </div>
+    <div>
+        <button>Save Changes</button>
+    </div>
+
+</form>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+﻿@model WebApp.Models.Member
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">@Model.Username</div>
+    </div>
+
+    <div class="card-body">
+        <table class="table-bordered table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Role</th>
+                    <th>Checked</th>
+                </tr>
+             </thead>
+            <tbody>
+                @foreach(WebApp.Models.RoleChecked item in ViewBag.roles)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>
+                        @if (item.Checked)
+                        {
+                            <input class="c" type="checkbox" value="@item.Id" checked />
+                        }
+                        else
+                        {
+                            <input class="c" type="checkbox" value="@item.Id" />
+                        }
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $('.c').click(function () {
+        var rid = $(this).val();
+        var o = { roleId: rid, memberId: '@Model.Id' };
+        console.log(o);
+        $.post('/member/addrole', o, (d) => {
+            console.log(d);
+        });
+    });
+</script>

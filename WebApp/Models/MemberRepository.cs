@@ -23,6 +23,11 @@ namespace WebApp.Models
             return context.SaveChanges();
         }
 
+        public Member GetMemberById(string id)
+        {
+            return context.Members.Find(id);
+        }
+
         public Member Login(LoginModel obj)
         {
             return context.Members.Where(p => (p.Username == obj.Username || p.Email == obj.Username)

@@ -14,10 +14,12 @@ namespace WebApp.Controllers
     public class AuthController : Controller
     {
         MemberRepository repository;
+        RoleRepository roleRepository;
 
         public AuthController(CSContext context)
         {
             repository = new MemberRepository(context);
+            roleRepository = new RoleRepository(context);
         }
         public IActionResult Register()
         {
@@ -56,6 +58,17 @@ namespace WebApp.Controllers
                     new Claim(ClaimTypes.Gender, member.Gender.ToString()),
                     new Claim(ClaimTypes.NameIdentifier, member.Id)
                 };
+                //Thieu Roles
+                List<Role> roles = roleRepository.GetRolesByMemberId(member.Id);
+                if(roles != null)
+                {
+                    foreach(var item in roles)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, item.Name));
+                    }
+                }
+
+
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
                 ClaimsPrincipal principal = new ClaimsPrincipal(claimsIdentity);
