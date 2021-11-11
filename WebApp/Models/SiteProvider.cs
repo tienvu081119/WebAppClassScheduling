@@ -9,13 +9,57 @@ namespace WebApp.Models
 
     //Dispose
     //Khá quan trọng
-    public class SiteProvider : IDisposable
+    public class SiteProvider 
     {
-        public SiteProvider(IConfiguration configuration)
+        CSContext context;
+
+        public SiteProvider(CSContext context)
         {
-            Console.WriteLine("************************");
-            Console.WriteLine("Stite Provider Start");
-            Console.WriteLine($"Connection String: { configuration.GetConnectionString("CS")}");
+            //Khuyet (do Constructor)
+            //Tu dong khoi tao
+            this.context = context;
+        }
+
+        //Fields
+        RoleRepository role;
+        MemberRepository member;
+        MemberInRoleRepository memberInRole;
+
+
+        public MemberInRoleRepository MemberInRole
+        {
+            get
+            {
+                if(memberInRole is null)
+                {
+                    memberInRole = new MemberInRoleRepository(context);
+                }
+                return memberInRole;
+            }
+        }
+
+        public MemberRepository Member
+        {
+            get
+            {
+                if(member is null)
+                {
+                    member = new MemberRepository(context);
+                }
+                return member;
+            }
+        }
+
+        public RoleRepository Role
+        {
+            get
+            {
+                if(role is null)
+                {
+                    role = new RoleRepository(context);
+                }
+                return role;
+            }
         }
 
         public void DoSomeThing()

@@ -11,16 +11,11 @@ using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
-        MemberRepository repository;
-        RoleRepository roleRepository;
 
-        public AuthController(CSContext context)
-        {
-            repository = new MemberRepository(context);
-            roleRepository = new RoleRepository(context);
-        }
+        public AuthController(SiteProvider provider) : base(provider) { }
+       
         public IActionResult Register()
         {
             return View();
@@ -29,7 +24,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult Register(RegisterModel obj)
         {
-            repository.Add(new Member {
+            provider.Member.Add(new Member {
                 Id= Helper.RandomString(32),
                 Email = obj.Email,
                 Gender = obj.Gender,
@@ -48,7 +43,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel obj)
         {
-            Member member = repository.Login(obj);
+            Member member = provider.Member.Login(obj);
             if(member != null)
             {
                 List<Claim> claims = new List<Claim>
@@ -59,7 +54,7 @@ namespace WebApp.Controllers
                     new Claim(ClaimTypes.NameIdentifier, member.Id)
                 };
                 //Thieu Roles
-                List<Role> roles = roleRepository.GetRolesByMemberId(member.Id);
+                List<Role> roles = provider.Role.GetRolesByMemberId(member.Id);
                 if(roles != null)
                 {
                     foreach(var item in roles)

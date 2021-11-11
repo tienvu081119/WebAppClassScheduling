@@ -1,0 +1,33 @@
+﻿@model List<WebApp.Models.Member>
+
+    <h1 class="mt-4">Manager member</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Member</li>
+    </ol>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Username</td>
+                    <td>@item.Email</td>
+                    <td>@item.Gender</td>
+                    <td>
+                        <a href="/dashboard/member/role/@item.Id">Roles</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

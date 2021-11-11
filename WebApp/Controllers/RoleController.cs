@@ -7,25 +7,30 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
-        RoleRepository repository;
+        //RoleRepository repository;
 
-        public RoleController(CSContext context)
+        //public RoleController(CSContext context)
+        //{
+        //    repository = new RoleRepository(context);
+        //}
+
+        public RoleController(SiteProvider provider) : base(provider)
         {
-            repository = new RoleRepository(context);
+
         }
 
         public IActionResult Index()
         {
-            return View(repository.GetRoles());
+            return View(provider.Role.GetRoles());
         }
 
         [HttpPost]
 
         public IActionResult Create(Role obj)
         {
-            repository.Add(obj);
+            provider.Role.Add(obj);
             return Redirect("/role");
         }
     }

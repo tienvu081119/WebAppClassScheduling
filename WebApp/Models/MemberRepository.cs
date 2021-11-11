@@ -10,6 +10,12 @@ namespace WebApp.Models
     {
         public MemberRepository(CSContext context) : base(context) { }
 
+        public List<Member> Search(string q)
+        {
+            return context.Members.Where(p=>p.Username.Contains(q)).ToList();
+        }
+
+
         public List<Member> GetMembers()
         {
             return context.Members.ToList();

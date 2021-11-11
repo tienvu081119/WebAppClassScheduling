@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WebApp.Models
 {
     public class CSContext : DbContext
-    {
+    {      
         public CSContext(DbContextOptions options) : base(options)
         {
 
@@ -23,9 +23,10 @@ namespace WebApp.Models
         public DbSet<Class> Classes { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<MemberInRole> MemberInRoles { get; set; }
-        
+        public DbSet<MemberInRole> MemberInRoles { get; set; }        
         public DbSet<RoleChecked> RoleCheckeds { get; set; }
+
+        public DbSet<Student> Students { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
