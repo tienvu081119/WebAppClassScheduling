@@ -25,8 +25,9 @@ namespace WebApp.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<MemberInRole> MemberInRoles { get; set; }        
         public DbSet<RoleChecked> RoleCheckeds { get; set; }
-
         public DbSet<Student> Students { get; set; }
+
+        public DbSet<Access> Accesses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

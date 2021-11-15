@@ -24,7 +24,20 @@ namespace WebApp.Models
         RoleRepository role;
         MemberRepository member;
         MemberInRoleRepository memberInRole;
+        AccessRepository access;
 
+
+        public AccessRepository Access
+        {
+            get
+            {
+                if(access is null)
+                {
+                    access = new AccessRepository(context);
+                }
+                return access;
+            }
+        }
 
         public MemberInRoleRepository MemberInRole
         {

@@ -38,10 +38,10 @@ namespace WebApp.Areas.Dashboard.Controllers
             return View(provider.Member.GetMemberById(id));
         }
 
-        public IActionResult Index()
-        {
-            return View(provider.Member.GetMembers());
-        }
+        //public IActionResult Index()
+        //{
+        //    return View(provider.Member.GetMembers());
+        //}
         [HttpPost]
         public IActionResult AddRole(MemberInRole obj)
         {

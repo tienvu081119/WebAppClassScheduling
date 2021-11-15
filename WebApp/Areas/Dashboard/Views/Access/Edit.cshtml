@@ -1,0 +1,16 @@
+﻿@model WebApp.Models.Access
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<form method="post">
+    <div>
+        <label>Role</label>
+        <select asp-for="RoleId" asp-items="@ViewBag.roles"></select>
+    </div>
+
+    <div>
+        <label>Url</label>
+        <input type="Text" asp-for="Url">
+    </div>
+    <div>
+        <button>Save Changes</button>
+    </div>
+</form>
