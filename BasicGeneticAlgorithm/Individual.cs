@@ -14,6 +14,14 @@ namespace BasicGeneticAlgorithm
         // Độ thích nghi (max = 1)
         //[0 =>1]
         double fitness = -1;
+        public double Fitness
+        {
+            get
+            {
+                return fitness;
+            }
+        }
+
         Random random = new Random();
         public Individual(int[] chromosome)
         {
