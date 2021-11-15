@@ -18,5 +18,7 @@ namespace WebApp.Models
         public string Email { get; set; }
 
         public bool Gender { get; set; }
+        public string Token { get; set; }
+
     }
 }

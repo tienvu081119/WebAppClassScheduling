@@ -15,7 +15,46 @@ namespace WebApp.Models
             return context.Members.Where(p=>p.Username.Contains(q)).ToList();
         }
 
+        public int Update(ResetPassword obj)
+        {
+            Member member = context.Members.Where(p => p.Token == obj.Token).FirstOrDefault();
+            if(member != null)
+            {
+                member.Password = Helper.Hash(obj.NewPassword);
+                member.Token = null;
+                context.Members.Update(member);
+                return context.SaveChanges();
+            }
+            return 0;
 
+        }
+
+        public int Update(ForgotPassword obj)
+        {
+            Member member = context.Members.Where(p => p.Email == obj.Email).FirstOrDefault();
+            if (member != null)
+            {
+              
+                member.Token = obj.Token;
+                context.Members.Update(member);
+                return context.SaveChanges();
+            }
+            return 0;
+        }
+
+
+        public int ChangePassword(ChangeModel obj)
+        {
+            Member member = context.Members.Where(p => p.Id == obj.MemberId && p.Password == Helper.Hash(obj.OldPassword)).FirstOrDefault();
+            if(member != null)
+            {
+                member.Password = Helper.Hash(obj.NewPassword);
+                context.Members.Update(member);
+                return context.SaveChanges();
+            }
+            return 0;
+
+        }
         public List<Member> GetMembers()
         {
             return context.Members.ToList();

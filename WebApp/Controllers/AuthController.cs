@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApp.Models;
@@ -13,9 +17,91 @@ namespace WebApp.Controllers
 {
     public class AuthController : BaseController
     {
+        IConfiguration configuration;
 
-        public AuthController(SiteProvider provider) : base(provider) { }
-       
+        public AuthController(SiteProvider provider, IConfiguration configuration) : base(provider) {
+            this.configuration = configuration;
+        }
+
+        public IActionResult Password()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Password(ForgotPassword obj)
+        {
+            string token = Helper.RandomString(32);
+            obj.Token = token;
+            int ret = provider.Member.Update(obj);
+            if (ret > 0)
+
+            {
+                string body = $"<a href=\"https://localhost:44369/auth/reset/{token}\">Click here Reset Password</a>";
+                IConfigurationSection section = configuration.GetSection("Email:Gmail");
+
+                
+                SmtpClient client = new SmtpClient(section.GetSection("Host").Value, Convert.ToInt32(section.GetSection("Port").Value))
+                {
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential("ltvnetcore@gmail.com", "$tvne!c0re")
+                };
+                MailAddress from = new MailAddress("ltvnetcore@gmail.com");
+                MailAddress to = new MailAddress(obj.Email);
+                MailMessage mailMessage = new MailMessage(from, to);
+                mailMessage.Subject = "App Scheduling Reset Password";
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Body = body;
+                client.Send(mailMessage);
+                TempData["email"] = obj.Email;
+                return Redirect("/auth/SentSuccess");
+            }
+            ModelState.AddModelError("", "Email Not Found");
+            return View(obj);
+        }
+
+        public IActionResult SentSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult Reset(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Reset(string id, ResetPassword obj)
+        {
+            obj.Token = id;
+            int ret = provider.Member.Update(obj);
+            if (ret > 0)
+            {
+                return Redirect("/auth/login");
+            }
+            ModelState.AddModelError("", "Token Ivalid");
+            return View(obj);
+        }
+
+        [Authorize]
+        public IActionResult Change()
+        {
+            return View();
+        }
+
+        [Authorize, HttpPost]
+        public IActionResult Change(ChangeModel obj)
+        {
+            obj.MemberId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int ret = provider.Member.ChangePassword(obj);
+            if(ret == 0)
+            {
+                ModelState.AddModelError("", "Change Password Failed");
+                return View(obj);
+            }
+            //return Redirect("/Auth");
+            return Redirect("/auth/logout");
+        }
+
         public IActionResult Register()
         {
             return View();
