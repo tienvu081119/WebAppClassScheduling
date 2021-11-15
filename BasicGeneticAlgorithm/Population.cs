@@ -12,7 +12,15 @@ namespace BasicGeneticAlgorithm
         Individual[] population;
         //Tổng số fitness của các cá thể
         //độ thích nghi
-        double fitness;
+        //Tổng độ thích nghi của các cá thể
+        double fitness = -1;
+        public double Fitness
+        {
+            get
+            {
+                return fitness;
+            }
+        }
         // Số lượng quần thể
         public Population (int size)
         {
