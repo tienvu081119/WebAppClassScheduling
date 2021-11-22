@@ -9,7 +9,7 @@ namespace WebApp.Models
 
     //Dispose
     //Khá quan trọng
-    public class SiteProvider 
+    public class SiteProvider
     {
         CSContext context;
 
@@ -25,7 +25,44 @@ namespace WebApp.Models
         MemberRepository member;
         MemberInRoleRepository memberInRole;
         AccessRepository access;
+        ProvinceRepository province;
+        DistrictRepository district;
+        WardRepository ward;
+        public WardRepository Ward
+        {
+            get
+            {
+                if(ward is null)
+                {
+                    ward = new WardRepository(context);
+                }
+                return ward;
+            }
+        }
 
+        public DistrictRepository District
+        {
+            get
+            {
+                if(district is null)
+                {
+                    district = new DistrictRepository(context);
+                }
+                return district;
+            }           
+        }
+
+        public ProvinceRepository Province
+        {
+            get
+            {
+                if(province is null)
+                {
+                    province = new ProvinceRepository(context);
+                }
+                return province;
+            }
+        }
 
         public AccessRepository Access
         {

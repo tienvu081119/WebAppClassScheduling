@@ -1,0 +1,57 @@
+﻿@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<form method="post">
+    <div>
+        <label>Province</label>
+        <select name="provinceId" asp-items="@ViewBag.provinces"></select>
+    </div>
+    <div>
+        <label>District</label>
+        <select name="districtId"></select>
+    </div>
+    <div>
+        <label>Ward</label>
+        <select name="wardId"></select>
+    </div>
+
+</form>
+
+<script>
+    function loadDistrict(id) {
+        $.post(`/dashboard/ajax/getdistricts/${id}`, (d) => {
+            $('select[name="districtId"]').html(null);
+            for (var i in d) {
+                $('select[name="districtId"]').append(`<option value="${d[i]['id']}">${d[i]['name']}</option>`);
+            }
+            getWard($('select[name="districtId"]').val());
+        })
+    } 
+  
+    function getWard(id) {       
+        $.post(`/dashboard/ajax/getwards/${id}`, (d) => {
+            $('select[name="wardId"]').html(null);
+            for (var i in d) {
+                $('select[name="wardId"]').append(`<option value="${d[i]['id']}">${d[i]['name']}</option>`);
+            }
+        });
+    }
+    
+    var pid = localStorage.getItem('pid');
+    if (pid == null) {
+        pid = $('select[name="provinceId"]').val();
+        localStorage.setItem('pid', pid);
+    }
+    $('select[name="provinceId"]').val(pid);
+    loadDistrict($(pid));
+
+    $('select[name="provinceId"]').change(function () {
+        var id = $(this).val();
+        localStorage.setItem("pid",id);
+        loadDistrict(id);
+    })
+
+    $('select[name="districtId"]').change(function () {
+       getWard($(this).val());
+    })
+
+
+</script>
