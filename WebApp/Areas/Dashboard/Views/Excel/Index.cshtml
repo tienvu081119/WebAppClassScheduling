@@ -1,0 +1,89 @@
+﻿<form action="/dashboard/excel/upload" enctype="multipart/form-data" method="post">
+    <div>
+        <label>Chose File</label>
+        <input type="file" name="f"/>
+    </div>
+    <div>
+        <button>Save Changes</button>
+    </div>
+</form>
+<ul class="pagination">
+    @for (int i = 1; i <= ViewBag.total; i++)
+    {
+        <li class="page-item"><a class="page-link" href="/dashboard/excel/index/@i">@i</a></li>
+    }
+</ul>
+    @*<ul class="pagination">
+    @{int p = ViewContext.RouteData.Values["Id"] != null ? Convert.ToInt32(ViewContext.RouteData.Values["id"]) : 1;}
+    @for (int i = 1; i <= ViewBag.total; i++)
+    {
+        if (Context.Request.Query.ContainsKey("q"))
+        {
+            @if (p == i)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="/dashboard/excel/index/@i?q=@Context.Request.Query["q"]">@i</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/dashboard/excel/index/@i?q=@Context.Request.Query["q"]">@i</a>
+                </li>
+            }
+        }
+        else
+        {
+            if (i == p)
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="/dashboard/excel/index/@i">@i</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item active">
+                    <a class="page-link" href="/dashboard/excel/index/@i">@i</a>
+                </li>
+            }
+        }
+    }
+</ul>*@
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>RowId</th>
+            <th>Order Id</th>
+            <th>Order Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.RowId</td>
+                <td>@item.OrderId</td>
+                <td>@item.OrderDate</td>
+                <td>@item.ShipDate</td>
+                <td>@item.ShipMode</td>
+                <td>@item.CustomerId</td>
+                <td>@item.CustomerName</td>
+                <td>@item.Segment</td>
+                <td>@item.Country</td>
+                <td>@item.State</td>
+                <td>@item.PostalCode</td>
+                <td>@item.Region</td>
+                <td>@item.ProductId</td>
+                <td>@item.Category</td>
+                <td>@item.SubCategory</td>
+                <td>@item.ProductName</td>
+                <td>@item.Sales</td>
+                <td>@item.Quantity</td>
+                <td>@item.Discount</td>
+                <td>@item.Profit</td>
+            </tr>
+        }
+    </tbody>
+</table>

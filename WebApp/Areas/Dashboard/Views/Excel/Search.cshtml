@@ -1,0 +1,14 @@
+﻿@model List<WebApp.Models.SiteProvider>
+
+<ul class="pagination">
+    @for (int i = 1; i <= ViewBag.total; i++)
+    {
+        <li class="page-item"><a class="page-link" href="/dashboard/excel/@i?q=@Context.Request.Query["q"]">@i</a></li>
+    }
+</ul>
+@{ int p = ViewContext.RouteData.Values["id"] != null ? Convert.ToInt32(ViewContext.RouteData.Values["id"]) : 1;
+}
+
+<script>
+    $($('.pagination > li.page-item')[@(p-1).addClass('active');
+</script>

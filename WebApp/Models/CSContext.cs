@@ -30,10 +30,11 @@ namespace WebApp.Models
         public DbSet<Province> Provinces { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Ward> Wards { get; set; }
-
+        public DbSet<Superstore> Superstores { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Superstore>().HasKey(p => new { p.RowId });
             modelBuilder.Entity<MemberInRole>().HasKey(p => new { p.MemberId, p.RoleId });
 
             modelBuilder.Entity<ModuleProfessor>().HasKey(p => new { p.ModuleId, p.ProfessorId });
