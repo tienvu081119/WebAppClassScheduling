@@ -16,7 +16,48 @@ namespace WebApp.Areas.Dashboard.Controllers
     public class ExcelController : BaseController
     {
         public ExcelController(SiteProvider provider) : base(provider) { }
-        int size = 500;
+        int size = 50;
+
+
+        public  IActionResult Datatable()
+        {
+            return View(provider.Superstore.GetSuperstores());
+        }
+
+        public IActionResult LazyLoad()
+        {
+            return LoadMore();
+        }
+
+
+
+        public IActionResult LoadMore()
+        {
+            List<Superstore> list = provider.Superstore.GetSuperstores(1, size, out int total);
+            ViewBag.total = total;
+            return View(list);
+        }
+
+        public IActionResult Find(string q)
+        {
+            if(string.IsNullOrEmpty(q))
+            {
+                return View();
+            }
+            List<Superstore> list = provider.Superstore.SearchSuperstores(q,1, size, out int total);
+            ViewBag.total = total;
+            return View(list);
+        }
+        public IActionResult SearchJson(int id, string q)
+        {
+            return Json(provider.Superstore.SearchSuperstores(q, id, size));
+        }
+
+        public IActionResult LoadJson(int id)
+        {
+           return Json(provider.Superstore.GetSuperstores(1, size));
+         
+        }
 
         public IActionResult Search(string q, int id = 1)
         {

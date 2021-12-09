@@ -1,0 +1,42 @@
+﻿@model List<WebApp.Models.Superstore>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+<partial name="_Superstore" model="@Model"/>
+
+<div class="form-text">
+    <button id="btn" class="btn btn-primary" >Load More</button>
+</div>
+<script>
+    var p = 1;
+    $(btn).click(() => {
+        p++;
+        $.post(`/dashboard/excel/loadjson/${p}`, (d) => {
+            /*console.log(d);*/
+            for (var i in d) {
+                $(sheet).append(`<tr>
+                <td>${d[i]['rowId']}</td>
+                <td>${d[i]['orderId']}</td>
+                <td>${d[i]['orderDate']}</td>
+                <td>${d[i]['shipDate']}</td>
+                <td>${d[i]['shipMode']}</td>
+                <td>${d[i]['customerId']}</td>
+                <td>${d[i]['customerName']}</td>
+                <td>${d[i]['segment']}</td>
+                <td>${d[i]['country']}</td>
+                <td>${d[i]['state']}</td>
+                <td>${d[i]['postalCode']}</td>
+                <td>${d[i]['region']}</td>
+                <td>${d[i]['productId']}</td>
+                <td>${d[i]['category']}</td>
+                <td>${d[i]['subCategory']}</td>
+                <td>${d[i]['productName']}</td>
+                <td>${d[i]['sales']}</td>
+                <td>${d[i]['quantity']}</td>
+                <td>${d[i]['discount']}</td>
+                <td>${d[i]['profit']}</td>`);
+            }
+        });
+        if (p >= @ViewBag.total) {
+            $(btn).hide();
+        }
+    })
+</script>

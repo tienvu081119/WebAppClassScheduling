@@ -1,0 +1,32 @@
+﻿<button id="open">Open WebCam</button>
+<button id="close">Close WebCam</button>
+<button id="take">Take Pic</button>
+<video autoplay="autoplay" id="vd"></video>
+<canvas width="100" height="100" id="cv"></canvas>
+
+<script>
+    var opt = { audio: false, video: { width: 100, height: 100 } };
+    $('#open').click(() => {
+        navigator.mediaDevices.getUserMedia(opt).then((str) => {
+            vd.srcObject = str;
+        });
+    });
+    $('#close').click(() => {
+        var str = vd.srcObject;
+        var tracks = str.getTracks();
+        for (var i in tracks) {
+            tracks[i].stop();
+        }
+        vd.srcObject = null;
+    });
+
+    $('#take').click(() => {
+        var ct = cv.getContext('2d');
+        ct.drawImage(vd, 0, 0);
+        var data = cv.toDataURL('image/png');
+
+        $.post('/dashboard/image/webcam', { f: data.substring(22) }, (d) => {
+            console.log(d);
+        });
+    });
+</script>

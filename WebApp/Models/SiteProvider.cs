@@ -29,6 +29,33 @@ namespace WebApp.Models
         DistrictRepository district;
         WardRepository ward;
         SuperstoreRepository superstore;
+        ImageRepository image;
+        CategoryRepository category;
+
+        public CategoryRepository Category
+        {
+            get
+            {
+                if (category is null)
+                {
+                    category = new CategoryRepository(context);
+                }
+                return category;
+            }
+        }
+
+        public ImageRepository Image
+        {
+            get
+            {
+                if(image  is null)
+                {
+                    image = new ImageRepository(context);
+                }
+                return image;
+            }
+
+        }
 
         public SuperstoreRepository Superstore
         {

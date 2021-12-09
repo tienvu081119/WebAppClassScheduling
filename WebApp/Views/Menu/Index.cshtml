@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Category>
+<ul>
+    @foreach(var item in Model)
+     {
+        <li><a href="#/@item.Id">@item.Name</a>
+        @if(item.Children != null)
+                {
+                    <ul>
+                    @foreach(var child in item.Children)
+                    {
+                        <li><a href="#/@child.Id">@child.Name</a>
+                        @if (child.Children != null)
+                        {
+                            <ul>
+                                @foreach (var child2 in child.Children)
+                                {
+                                    <li>
+                                        <a href="#/@child2.Id">@child2.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        </li>
+                    }
+                    </ul>
+                }
+
+        </li>
+     }
+</ul>

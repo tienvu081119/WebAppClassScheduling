@@ -1,0 +1,7 @@
+﻿@model List<Superstore>
+<link href="~/css/jquery.dataTables.min.css" rel="stylesheet" />
+<partial name="_Superstore" model="@Model" />
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script>
+    $('.table').dataTable();
+</script>

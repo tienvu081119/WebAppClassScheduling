@@ -1,0 +1,17 @@
+﻿@model Category
+<form method="post">
+    <div>
+        <label asp-for="ParentId">Parent</label>
+        <select asp-for="ParentId" asp-items="@ViewBag.categories">
+            <option value="">--Select Parent--</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="Name">Name</label>
+        <input type="text" asp-for="Name" />
+    </div>
+
+    <div>
+        <button>Save Changes</button>
+    </div>
+</form>

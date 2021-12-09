@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Apps.Component.HtmlAgilityPack" Version="1.0.1" />
     <PackageReference Include="FluentMigrator.Runner" Version="3.3.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\data\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

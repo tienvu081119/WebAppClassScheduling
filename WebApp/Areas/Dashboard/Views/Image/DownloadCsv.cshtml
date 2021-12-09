@@ -1,0 +1,14 @@
+﻿@model List<string>
+<form method="post">
+    <button>Download</button>
+</form>
+
+@if (Model != null)
+            {
+                <ul>
+                    @foreach(string item in Model)
+                {
+                    <li>@item</li>
+                }
+                </ul>
+            }

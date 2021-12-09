@@ -1,0 +1,27 @@
+﻿<div ondrop="dropHandler(event)" ondragover="dragoverHandler(event)" id="zone">
+    Drop Zone
+</div>
+<style>
+    #zone{
+        border: 1px solid #ddd;
+        width: 300px;
+        height: 270px;
+        text-align: center;
+        background-color: bisque;
+    }
+</style>
+
+<script>
+    function dropHandler(ev) {
+        ev.preventDefault();
+        //console.log(ev.dataTransfers.files);
+        var fiels = ev.dataTransfer.fiels;
+        var fd = new FormData();
+        for (var i = 0; i < fiels.length; i++) {
+            fd.append()
+        }
+    }
+    function darpoverHandler(ev) {
+        ev.preventDefault();
+    }
+</script>
